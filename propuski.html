@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="C:\Users\cpu\Documents\апи\b.css">
+    <style>
+        body {
+            text-align: center; 
+        }
+        input, label, select {
+            display: block; 
+            margin: 15px auto; 
+            width: 250px;  
+            height: 25px;
+        }
+        .btn{
+            width: 250px;
+            height: 45;
+        }
+        
+    </style>
+    <header>
+        <h2>Добавить данные об авто</h2>
+    </header>
+</head>
+<body>
+    <label for="truckPlateNumberInput">Гос. номер:</label>
+<input type="text" id="truckPlateNumberInput" placeholder="Укажите гос. номер" />
+
+<label for="destinationSelect">Куда:</label>
+<select id="destinationSelect">
+   <option value="1">МКАД</option>
+   <option value="2">ТТК</option>
+   <option value="3">СК</option>
+</select>
+
+<label for="expirationDateInput">Срок окончания:</label>
+<input type="date" id="expirationDateInput" />
+
+<label for="passNumberInput">Серия и номер пропуска:</label>
+<input type="text" id="passNumberInput" placeholder="Укажите серию и номер пропуска" />
+
+<button class="btn" onclick="saveTruckData()">Сохранить данные</button>
+
+<script>
+   function saveTruckData(id) {
+    var token = localStorage.getItem('token');  // Получение токена из локального хранилища
+
+    var truckPlateNumber = document.getElementById('truckPlateNumberInput').value;
+    var destinationSelect = document.getElementById('destinationSelect').value;
+    var expirationDate = document.getElementById('expirationDateInput').value;
+    var passNumber = document.getElementById('passNumberInput').value;
+
+    var fromValue = 0;
+    switch (destinationSelect) {
+        case '1':
+            fromValue = 'МКАД';
+            break;
+        case '2':
+            fromValue = 'ТТК';
+            break;
+        case '3':
+            fromValue = 'СК';
+            break;
+        default:
+            fromValue = 'МКАД';
+    }
+
+    var exDateTime = new Date(expirationDate).toISOString();
+
+    var truckData = {
+        id: id,  // Добавление ID автомобиля в объект данных
+        truckPlateNumber: truckPlateNumber,
+        from: fromValue,
+        exDateTime: exDateTime,
+        passNumber: passNumber
+    };
+
+    var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    fetch('https://localhost:7077/api/document/' + id + '/createPass', {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(truckData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Данные успешно отправлены');
+            window.location.href = "lk.html";
+        } else {
+            console.error('Ошибка при отправке данных');
+        }
+    })
+    .catch(error => {
+        console.error('Произошла ошибка:', error);
+    });
+}
+
+</script>
+</body>
+</html>
+

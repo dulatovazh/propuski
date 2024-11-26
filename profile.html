@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="b.css">
+    <title>Профиль</title>
+</head>
+<style>
+    body{
+        margin-top: 60px;
+    }
+    table {
+            margin-left: 20px; /* Отступ слева */
+            margin-top: 40px; 
+    }
+</style>
+
+<body>
+    <div class="top-bar">
+        <img src="C:\Users\cpu\Downloads\pngwing.com (1).png" alt="иконка" class="icon">
+        <a href="api.html">Главная</a>
+        <a href="lk.html">Личный кабинет</a>
+        <a href="faq.html">FAQ</a>
+        <a href="vhod.html" class="exit-btn">Выйти</a>
+    </div>
+
+    <h2 align="center">Профиль</h2>
+
+    <div class="main">
+        <table class="profile-table">
+            <tr>
+                <th>ФИО</th>
+                <td id="fullname"></td>
+            </tr>
+            <tr>
+                <th>Электронная почта</th>
+                <td id="email"></td>
+            </tr>
+            <tr>
+                <th>Количество машин</th>
+                <td id="carCount"></td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+     var fullname = 'Дулатова Жыпара';
+var email = 'zh@gmail.com';
+
+var carCount = localStorage.getItem('carCount');
+
+// Заполняем поля на странице
+document.getElementById('fullname').textContent = fullname;
+document.getElementById('email').textContent = email;
+
+document.getElementById('carCount').textContent = carCount;
+    </script>
+    
+</body>
+</html>

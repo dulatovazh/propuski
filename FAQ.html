@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="C:\Users\cpu\Documents\апи\b.css">
+    <title>FAQ</title>
+    <style>
+        body {
+            margin-top: 60px;
+            margin-left: 20px;
+            text-align: left;
+        }
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-left: 20px;
+            text-align: left;
+        }
+        .faq-question, .faq-answer {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .faq-question {
+            list-style-type: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .faq-question:hover {
+            color: #9CAF88; /* Изменение цвета при наведении */
+        }
+        .faq-answer {
+            display: none;
+            text-align: left;
+        }
+        header{
+          margin-left: 20px;
+        }
+    </style>
+</head>
+
+<header>
+  <h2>Часто задаваемые вопросы</h2>
+</header>
+
+<body>
+<div class="top-bar">
+    <img src="C:\Users\cpu\Downloads\pngwing.com (1).png" alt="иконка" class="icon">
+    <a href="api.html">Главная</a>
+    <a href="regis.html">Регистрация</a>
+    <a href="vhod.html">Вход</a>
+</div>
+<div class="faq-container">
+    <div class="faq-question">• Отличие КАСКО от ОСАГО</div>
+    <div class="faq-answer">
+        <p>КАСКО - это добровольное страхование, которое защищает ваш собственный автомобиль, в то время как ОСАГО - это обязательное страхование, которое покрывает расходы пострадавших и материальный ущерб, вызванный аварией, в которую вовлечен ваш автомобиль</p>
+    </div>
+    <div class="faq-question">• Диагностическая карта</div>
+    <div class="faq-answer">
+        <p>Диагностическая карта (или техническая диагностика) - это документ, подтверждающий успешное прохождение технического осмотра (диагностики) автотранспортного средства. Она выдается специализированными станциями технического осмотра после проверки автомобиля на соответствие установленным стандартам безопасности и экологическим требованиям. Диагностическая карта обязательна для всех автовладельцев и используется в процессе регистрации автомобиля, его продажи, а также при проезде через границы некоторых стран</p>
+    </div>
+    <div class="faq-question">• Пропуски на автомагистрали Москвы</div>
+    <div class="faq-answer">
+        <p>В Москве пропуски на автомагистрали, такие как МКАД, ТТК и СК, для грузовых автомобилей могут быть оформлены через специализированные службы или уполномоченные организации. Чтобы получить такие пропуски, обычно требуются следующие документы: регистрационные документы на автомобиль и документы, подтверждающие цель и необходимость проезда. Пропуски выдаются на определенный период времени в соответствии с установленными правилами</p>
+    </div>
+    <div class="faq-question">• Что будет, за отсутсвие документов?</div>
+    <div class="faq-answer">
+        <p>Штраф в размере 2000 рублей, за отсутствие диагностической карты <br>
+          Штраф от 500 до 800 рублей с учетом конкретных обстоятельств, из-за которых отсутствует полис ОСАГО <br>
+          Штраф на въезд без пропуска составляет 5 000 рублей за одно нарушение</p>
+    </div>
+</div>
+
+<script>
+    var faqQuestions = document.getElementsByClassName("faq-question");
+    for (let i = 0; i < faqQuestions.length; i++) {
+        faqQuestions[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var answer = this.nextElementSibling;
+            if (answer.style.display === "none" || answer.style.display === "") {
+                answer.style.display = "block"; // Показать ответ
+            } else {
+                answer.style.display = "none"; // Скрыть ответ
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

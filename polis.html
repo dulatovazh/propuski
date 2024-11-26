@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="C:\Users\cpu\Documents\апи\b.css">
+    <style>
+        body {
+            text-align: center; 
+        }
+        input, label {
+            display: block; 
+            margin: 15px auto; 
+            width: 250px; 
+            height: 25px;
+        }
+        .btn{
+            width: 250px;
+            height: 45;
+        }
+        
+    </style>
+    <header>
+    <h2>Добавить данные об авто</h2>
+</header>
+</head>
+    <body>
+        <form id="documentForm">
+            <label for="policyholderInput">Страхователь:</label>
+            <input type="text" id="policyholderInput" placeholder="Укажите страхователя" required>
+            
+            <label for="beneficiaryInput">Выгодоприобретатель:</label>
+            <input type="text" id="beneficiaryInput" placeholder="Укажите выгодоприобретателя" required>
+            
+            <label for="contractNumberCCIInput">Номер договора КАСКО:</label>
+            <input type="text" id="contractNumberCCIInput" placeholder="Укажите номер договора КАСКО" required>
+            
+            <label for="numberSeriesCCLIInput">Номер и серия ОСАГО:</label>
+            <input type="text" id="numberSeriesCCLIInput" placeholder="Укажите номер и серию ОСАГО" required>
+            
+            <label for="insuranceInput">Страховая премия:</label>
+            <input type="text" id="insuranceInput" placeholder="Укажите сумму страховой премии" required>
+            
+            <label for="сoverageAmountInput">Сумма покрытия:</label>
+            <input type="text" id="сoverageAmountInput" placeholder="Укажите сумму покрытия страховки" required>
+            
+            <button type="submit" class="btn">Сохранить данные</button>
+        </form>
+
+        <script>
+        document.getElementById('documentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var policyholder = document.getElementById('policyholderInput').value;
+        var beneficiary = document.getElementById('beneficiaryInput').value;
+        var contractNumberCCI = parseInt(document.getElementById('contractNumberCCIInput').value);
+        var numberSeriesCCLI = parseInt(document.getElementById('numberSeriesCCLIInput').value);
+        var insurance = parseInt(document.getElementById('insuranceInput').value);
+        var coverageAmount = parseInt(document.getElementById('coverageAmountInput').value);
+
+        var dataToSend = {
+            "policyholder": policyholder,
+            "beneficiary": beneficiary,
+            "contractNumberCCI": contractNumberCCI,
+            "numberSeriesCCLI": numberSeriesCCLI,
+            "insurance": insurance,
+            "сoverageAmount": coverageAmount
+        };
+
+        var documentId = 'd1e486cc-3033-4768-96f9-a2ed4ea07c14';
+
+        var options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(dataToSend)
+        };
+
+        fetch(`https://localhost:7077/api/document/${documentId}/createTransportDocument`, options)
+            .then(response => {
+            if (response.ok) {
+                response.json().then((data) => {
+                console.log('Документ успешно создан');
+                console.log('ID документа:', data.id);
+                // Добавьте обработку успешного создания документа
+                });
+            } else {
+                return response.json().then((data) => {
+                console.error('Ошибка при создании документа. Статус:', response.status);
+                console.error('Сообщение об ошибке:', data.message);
+                throw new Error(`Ошибка ${response.status}: ${data.message}`);
+                });
+            }
+            })
+            .catch(error => {
+            console.error('Ошибка при выполнении запроса:', error);
+            alert('Произошла ошибка при создании документа');
+            });
+        });
+        </script>
+    </body>
+
+</html>

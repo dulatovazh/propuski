@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в личный кабинет</title>
+    <link rel="stylesheet" href="C:\Users\cpu\Documents\апи\b.css">
+</head>
+<body>
+    <header>
+        <h2 style="text-align: center;">Вход в личный кабинет</h2>
+    </header>
+    <div class="main">
+        <div class="field">
+            <label for="login">Логин <br /></label>
+            <input type="text" id="login" />
+        </div>
+        <div class="field">
+            <label for="password">Пароль<br /></label>
+            <input type="password" id="password" /> 
+        </div>
+    </div>
+    
+    <div style="display: flex; justify-content: center;">
+        <button class="btn" style="width:150px; height:40px; font-size: 20px;" onclick="login()">Далее</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      function login() {
+            var login = document.getElementById("login").value;
+            var password = document.getElementById("password").value;
+
+            if (!login || !password) {
+                alert("Пожалуйста, введите логин и пароль.");
+                return;
+            }
+
+            var url = 'https://localhost:7077/api/auth/login';
+
+            var data = {
+                login: login,
+                password: password
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка HTTP: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Токен получен:', data.token);
+                localStorage.setItem('token', data.token);
+                window.location.href = 'lk.html'; // Переход на страницу сохранения данных
+            })
+            .catch(error => {
+                console.error('Ошибка при получении токена:', error);
+                alert('Произошла ошибка при отправке запроса. ' + error.message);
+            });
+        }
+    </script>
+    
+</body>
+</html>
+
+
+

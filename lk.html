@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="C:\Users\cpu\Documents\апи\b.css">
+    <style>
+        body {
+            margin-top: 60px;
+            margin-right: 40px;
+        }
+
+        .userData {
+            font-size: 14px;
+            margin-right: 20px;
+        }
+
+        table {
+            margin-right: 20px;
+            margin-left: 20px; /* Отступ слева */
+            margin-top: 40px; 
+            font-size: 15px;
+            
+        }
+        header {
+            margin-left: 20px; 
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="userData" id="userDataDisplay"></div>
+    </div>
+
+    <div class="top-bar">
+        <img src="C:\Users\cpu\Downloads\pngwing.com (1).png" alt="иконка" class="icon">
+        <a href="api.html">Главная</a>
+        <a href="profile.html">Профиль</a>
+        <a href="faq.html">FAQ</a>
+        <a href="vhod.html" class="exit-btn">Выйти</a>
+    </div>
+    
+    <header>
+        <h2>Список автомобилей и документов</h2>
+    </header>
+
+    <button class="btn" onclick="deleteAllData()">Удалить все</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Данные авто и диагностическая карта<button class="btn" onclick="redirectToPage('diagnostika.html', 'Диагностическая карта')" style="padding: 5px 10px;">+</button></th>
+                <th>Полис ОСАГО и КАСКО<button class="btn" onclick="redirectToPage('polis.html', 'Полис ОСАГО и КАСКО')" style="padding: 5px 10px;">+</button></th>
+                <th>Пропуски на автомагистрали Москвы<button class="btn" onclick="redirectToPage('propuski.html', 'Пропуски на автомагистрали')" style="padding: 5px 10px;">+</button></th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <script>
+        window.onload = function() {
+            updateNumbers();
+        }
+
+        function redirectToPage(page, message) {
+            window.open(page, '_self');
+        }
+
+        function deleteAllData() {
+            localStorage.removeItem('carData');
+            document.getElementById('tableBody').innerHTML = '';
+            updateNumbers();
+            alert('Данные удалены');
+        }
+
+        function deleteRow(row) {
+            var index = row.rowIndex;
+            document.getElementById('tableBody').deleteRow(index);
+            updateNumbers();
+            alert('Строка удалена');
+        }
+
+        function updateNumbers() {
+            var rows = document.querySelectorAll("#tableBody tr");
+            rows.forEach(function(row, index) {
+                var numCell = row.querySelector("td:first-child");
+                if (numCell) {
+                    numCell.textContent = index + 1;
+                }
+            });
+            var carCount = rows.length;
+            localStorage.setItem('carCount', carCount);
+        }
+    </script>
+</body>
+</html>

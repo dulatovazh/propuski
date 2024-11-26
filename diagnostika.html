@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="C:\Users\cpu\Documents\апи\b.css">
+    <style>
+        body {
+            text-align: center; 
+        }
+        input, label {
+            display: block; 
+            margin: 15px auto; 
+            width: 250px; 
+            height: 25px;
+        }
+        .btn {
+            width: 250px;
+            height: 45px;
+        }
+    </style>
+    <header>
+        <h2>Добавить данные об авто</h2>
+    </header>
+</head>
+<body> 
+    <label for="makeInput">Марка автомобиля:</label>
+    <input type="text" id="makeInput" placeholder="Введите марку" />
+    <label for="modelInput">Модель автомобиля:</label>
+    <input type="text" id="modelInput" placeholder="Введите модель" required />
+    <label for="yearInput">Год выпуска:</label>
+    <input type="number" id="yearInput" placeholder="Введите год выпуска" min="1900" max="2099" required />
+    <label for="colorInput">Цвет:</label>
+    <input type="text" id="colorInput" placeholder="Введите цвет" />
+    <label for="registrationNumberInput">Регистрационный номер:</label>
+    <input type="text" id="registrationNumberInput" placeholder="Введите регистрационный номер" />
+    <label for="vehicleIdentificationNumberInput">VIN номер:</label>
+    <input type="text" id="vehicleIdentificationNumberInput" placeholder="Введите VIN номер" />
+    <label for="engineCapacityInput">Объем двигателя:</label>
+    <input type="text" id="engineCapacityInput" placeholder="Укажите объем двигателя" />
+    <label for="priceInput">Цена:</label>
+    <input type="text" id="priceInput" placeholder="Укажите цену" />
+    <label for="diagnosticCardNumberInput">Номер диагностической карты:</label>
+    <input type="text" id="diagnosticCardNumberInput" placeholder="Укажите номер" />
+    <label for="horsepowerInput">Лошадиные силы:</label>
+    <input type="text" id="horsepowerInput" placeholder="Укажите количество лошадиных сил" />
+    <label for="expirationDateOfIssueInput">Дата окончания выдачи:</label>
+<input type="text" id="expirationDateOfIssueInput" placeholder="Введите дату окончания выдачи" />
+
+    <button class="btn" onclick="saveVehicleData()">Сохранить данные</button>
+
+    
+    <script>
+        
+        function saveVehicleData() {
+  var makeInput = document.getElementById("makeInput");
+  var modelInput = document.getElementById("modelInput");
+  var yearInput = document.getElementById("yearInput");
+  var colorInput = document.getElementById("colorInput");
+  var registrationNumberInput = document.getElementById("registrationNumberInput");
+  var vehicleIdentificationNumberInput = document.getElementById("vehicleIdentificationNumberInput");
+  var engineCapacityInput = document.getElementById("engineCapacityInput");
+  var priceInput = document.getElementById("priceInput");
+  var diagnosticCardNumberInput = document.getElementById("diagnosticCardNumberInput");
+  var horsepowerInput = document.getElementById("horsepowerInput");
+  var expirationDateOfIssueInput = document.getElementById("expirationDateOfIssueInput");
+
+  if (!makeInput || !modelInput || !yearInput || !colorInput || !registrationNumberInput || !vehicleIdentificationNumberInput || !engineCapacityInput || !priceInput || !diagnosticCardNumberInput || !horsepowerInput || !expirationDateOfIssueInput) {
+    console.error("Один или несколько элементов формы не найдены.");
+    return;
+  }
+
+  var make = makeInput.value;
+  var model = modelInput.value;
+  var year = yearInput.value;
+  var color = parseInt(colorInput.value);
+  var registrationNumber = registrationNumberInput.value;
+  var vehicleIdentificationNumber = vehicleIdentificationNumberInput.value;
+  var engineCapacity = parseFloat(engineCapacityInput.value);
+  var price = parseFloat(priceInput.value);
+  var diagnosticCardNumber = parseInt(diagnosticCardNumberInput.value);
+  var horsepower = parseInt(horsepowerInput.value);
+  var expirationDateOfIssue = expirationDateOfIssueInput.value;
+
+  var token = localStorage.getItem('token');
+  var data = {
+    make: make,
+    model: model,
+    year: year,
+    color: color,
+    registrationNumber: registrationNumber,
+    vehicleIdentificationNumber: vehicleIdentificationNumber,
+    engineCapacity: engineCapacity,
+    price: price,
+    diagnosticCardNumber: diagnosticCardNumber,
+    horsepower: horsepower,
+    expirationDateOfIssue: expirationDateOfIssue
+  };
+
+  var options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  };
+
+  fetch('https://localhost:7077/createVehicle', options)
+    .then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          console.log('Данные успешно отправлены');
+          console.log('ID транспортного средства:', data.id);
+          localStorage.setItem('vehicleIdentificationNumber', data.id);
+          window.location.href = 'lk.html';
+        });
+      } else {
+        return response.json().then((data) => {
+          console.error('Ошибка при отправке данных. Статус:', response.status);
+          console.error('Сообщение об ошибке:', data.message);
+          throw new Error(`Ошибка ${response.status}: ${data.message}`);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error('Ошибка при выполнении запроса:', error);
+      alert('Произошла ошибка при отправке данных. Пожалуйста, попробуйте еще раз.');
+    });
+}
+
+        </script>
+
+</body>
+</html>

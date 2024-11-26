@@ -1,0 +1,151 @@
+body {
+  font-family: Arial, sans-serif; /* Укажите желаемый шрифт */
+  font-weight: 400; /* Укажите желаемую толщину шрифта (например, 400 для обычной) */
+  background-color:  #CBD5C0;
+  font-size: 20px;
+  scrollbar-face-color: #14452F;/* Цвет полосы прокрутки */
+  color: #14452F;
+  overflow-x: hidden;
+  padding-top: 30px;
+  margin-left: 20px; /* Отступ слева */
+  margin-right: 20px; /* Отступ справа */
+}
+
+div {
+  text-align: center;
+} 
+
+.field {
+  clear: both; 
+  text-align: center; 
+  line-height: 40px;
+}
+
+label {
+  position: relative;
+  left: 5px;
+  margin-bottom: 5px; /* Добавляет интервал между ярлыком и полем ввода */
+  display: block; 
+  text-align: center;
+}
+
+.main {
+  position: relative;
+  left: 5px;
+}
+
+th {
+  font-family:  Arial, sans-serif;
+  font-weight: 400;
+}
+
+h2 {
+  font-family:Arial, sans-serif;
+  
+  font-size: 25px;
+  font-weight: bold;
+}
+
+input {
+  font-family: Arial, sans-serif;
+  color:  #14452F;
+  width: 250px; 
+  height: 25px;
+  text-align: center;
+  font-size: 17px; 
+  margin: 10px auto;
+}
+
+
+.btn {
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  color:  #14452F;
+  font-size: 17px; 
+  padding: 10px 20px; /* Отступы вокруг текста в кнопках */
+  margin-top: 15px;
+  margin-left: 15px;
+}
+.btn:hover {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #0A5C36
+}
+#displayData {
+  text-align: left;
+  font-size: 20px;
+  line-height: 1;
+}
+
+
+
+table {
+  width: 100%;
+	margin-bottom: 20px;
+	border: 15px solid #F2F8F8;
+	border-top: 5px solid #F2F8F8;
+	border-collapse: collapse; 
+  margin-top: 20px;
+  padding-right: 20px;
+  
+}
+
+td {
+  padding: 5px;
+	border: none;
+	border-bottom: 5px solid #F2F8F8;
+  vertical-align: top;
+  border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+  padding-right: 40px;
+  font-size: 15px;
+}
+
+th {
+  font-size: 15px;
+  font-weight: bold;
+	padding: 5px;
+	background: #F2F8F8;
+	border: none;
+	border-bottom: 5px solid #F2F8F8;
+  border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+  padding-right: 20px;
+}
+
+.top-bar {
+  background-color:  #9CAF88;
+  color:  #14452F;
+  padding: 25px 0; /* Увеличение вертикального отступа для увеличения высоты */
+  text-align: center; /* Центрирование элементов внутри шторки */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex; /* Использование flexbox для центрирования элементов */
+  justify-content: space-around; /* Равномерное распределение кнопок по ширине шторки */
+  padding-bottom: 20px;
+}
+
+.top-bar a {
+  text-decoration: none;
+  color:  #14452F;
+  font-size: 20px; /* Увеличение размера шрифта */
+  transition: color 0.3s;
+  font-weight: bold;
+}
+
+.top-bar a:hover {
+  color:  #CBD5C0;
+}
+.shutter {
+  display: flex;
+  align-items: left;
+  padding: 1px;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
